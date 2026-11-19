@@ -84,3 +84,42 @@ export const api = {
     request<{ endpoint: string; slept: number }>(`/api/lab/slow-${kind}?sleep=${sleep}`),
   metrics: () => request<MetricsOutput>("/api/metrics"),
 };
+
+/** Lưu lịch sử predict vào localStorage */
+export interface HistoryEntry {
+  id: number;
+  text: string;
+  category: string;
+  confidence: number;
+  cached: boolean;
+  clientMs: number;
+  timestamp: number;
+}
+
+const HISTORY_KEY = "predict_history";
+const MAX_HISTORY = 10;
+
+export function loadHistory(): HistoryEntry[] {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    return raw ? (JSON.parse(raw) as HistoryEntry[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveHistory(entries: HistoryEntry[]): void {
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(entries.slice(0, MAX_HISTORY)));
+}
+
+export function addToHistory(
+  entries: HistoryEntry[],
+  entry: Omit<HistoryEntry, "id">,
+): HistoryEntry[] {
+  const id = Date.now();
+  return [{ id, ...entry }, ...entries].slice(0, MAX_HISTORY);
+}
+
+export function clearHistory(): void {
+  localStorage.removeItem(HISTORY_KEY);
+}

@@ -743,6 +743,308 @@ tbody tr:hover {
   }
 }
 
+/* ── Toast Notifications ──────────────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  pointer-events: all;
+  animation: slideInRight 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  max-width: 340px;
+  backdrop-filter: blur(8px);
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.toast-success {
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: var(--text);
+}
+
+.toast-error {
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #ffd5d8;
+}
+
+.toast-info {
+  background: rgba(96, 165, 250, 0.1);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  color: var(--text);
+}
+
+.toast-icon {
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 0 0 4px;
+  margin-left: auto;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.toast-close:hover { opacity: 1; }
+
+/* ── Keyboard shortcut badge ──────────────────────────────────────── */
+.sidebar-kbd {
+  margin-left: auto;
+  font-size: 0.65rem;
+  font-family: "JetBrains Mono", monospace;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.sidebar-item.active .sidebar-kbd {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: rgba(52, 211, 153, 0.2);
+  color: rgba(52, 211, 153, 0.6);
+}
+
+.sidebar-divider {
+  border-top: 1px solid var(--border-subtle);
+  margin: 8px 4px;
+}
+
+.sidebar-hint {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin: 0;
+  padding: 0 14px;
+  line-height: 1.4;
+}
+
+/* ── Lab header with actions ──────────────────────────────────────── */
+.lab-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.lab-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ── Toggle button ────────────────────────────────────────────────── */
+.btn-toggle {
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-toggle:hover {
+  background: var(--panel-hover);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-toggle.active {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: rgba(52, 211, 153, 0.3);
+  color: var(--mint);
+}
+
+/* ── Ghost button ─────────────────────────────────────────────────── */
+.btn-ghost {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.82rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+}
+
+/* ── History panel ────────────────────────────────────────────────── */
+.history-panel {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+  border: 1px solid transparent;
+}
+
+.history-item:hover {
+  background: var(--panel-hover);
+  border-color: var(--border-subtle);
+}
+
+.history-text {
+  font-size: 0.85rem;
+  color: var(--text);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.history-badge {
+  background: var(--mint);
+  color: #022c1e;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+  margin-left: 2px;
+}
+
+/* ── Char counter ─────────────────────────────────────────────────── */
+.char-counter {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: -10px;
+  margin-bottom: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.char-counter.over {
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* ── Compare mode ─────────────────────────────────────────────────── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 2px;
+}
+
+.compare-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.compare-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+/* ── Result footer ────────────────────────────────────────────────── */
+.result-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Header left ──────────────────────────────────────────────────── */
+.header-left {
+  flex: 1;
+}
+
+@media (max-width: 700px) {
+  .compare-grid,
+  .compare-results {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-header {
+    flex-direction: column;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   .bar-fill,
@@ -754,6 +1056,10 @@ tbody tr:hover {
 
   .badge-online::before,
   .refresh-dot {
+    animation: none;
+  }
+
+  .toast {
     animation: none;
   }
 }
