@@ -5,6 +5,19 @@ export interface ScoredCategory {
   probability: number;
 }
 
+export interface ModelMetadata {
+  sklearn_version?: string;
+  trained_at?: string;
+  accuracy_test?: number;
+  categories?: string[];
+}
+
+export interface HealthData {
+  status: string;
+  categories: string[];
+  model_metadata?: ModelMetadata;
+}
+
 export interface PredictionOutput {
   category: string;
   confidence: number;
@@ -74,7 +87,7 @@ const json = (body: unknown): RequestInit => ({
 });
 
 export const api = {
-  health: () => request<{ status: string; categories: string[] }>("/api/health"),
+  health: () => request<HealthData>("/api/health"),
   predict: (text: string) => request<PredictionOutput>("/api/prediction", json({ text })),
   predictBatch: (texts: string[]) =>
     request<{ predictions: PredictionOutput[] }>("/api/prediction/batch", json({ texts })),
