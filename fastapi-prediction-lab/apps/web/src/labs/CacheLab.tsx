@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { api, ApiError, type CacheStats } from "../api";
 import { formatMs, median, speedup } from "../stats";
+import { ZapIcon } from "../Icons";
 
 interface Row {
   label: string;
@@ -92,7 +93,14 @@ export default function CacheLab() {
                     <td>{r.label}</td>
                     <td>
                       <span className={r.cached ? "tag hit" : "tag cold"}>
-                        {r.cached ? "✓ HIT" : "↓ COLD"}
+                        {r.cached ? (
+                          <>
+                            <ZapIcon size={12} />
+                            <span>HIT</span>
+                          </>
+                        ) : (
+                          <span>COLD</span>
+                        )}
                       </span>
                     </td>
                     <td>{formatMs(r.serverMs)}</td>

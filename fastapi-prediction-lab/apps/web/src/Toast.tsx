@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { CheckCircleIcon, AlertCircleIcon, InfoIcon } from "./Icons";
 
 export interface ToastMessage {
   id: number;
@@ -36,7 +37,7 @@ export function ToastContainer() {
       {toasts.map((t) => (
         <div key={t.id} className={`toast toast-${t.kind}`}>
           <span className="toast-icon">
-            {t.kind === "success" ? "✓" : t.kind === "error" ? "✕" : "ℹ"}
+            {t.kind === "success" ? <CheckCircleIcon size={16} /> : t.kind === "error" ? <AlertCircleIcon size={16} /> : <InfoIcon size={16} />}
           </span>
           <span>{t.text}</span>
           <button className="toast-close" onClick={() => remove(t.id)} aria-label="Đóng">×</button>

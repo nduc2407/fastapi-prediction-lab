@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { api, ApiError, type MetricsOutput } from "../api";
 import { formatMs } from "../stats";
+import { RefreshCwIcon } from "../Icons";
 
 const REFRESH_INTERVAL_MS = 5000;
 
@@ -61,11 +62,12 @@ export default function MetricsLab() {
         </span>
         <button
           className={`primary${loading ? " busy" : ""}`}
-          style={{ padding: "6px 14px", fontSize: "0.82rem" }}
+          style={{ padding: "6px 14px", fontSize: "0.82rem", display: "inline-flex", alignItems: "center", gap: 6 }}
           disabled={loading}
           onClick={() => void fetchMetrics()}
         >
-          {loading ? "Đang tải…" : "Làm mới"}
+          <RefreshCwIcon size={13} />
+          <span>{loading ? "Đang tải…" : "Làm mới"}</span>
         </button>
       </div>
 

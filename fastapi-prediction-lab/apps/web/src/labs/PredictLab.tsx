@@ -6,6 +6,13 @@ import {
 } from "../api";
 import { formatMs } from "../stats";
 import { toast } from "../Toast";
+import {
+  ClockIcon,
+  DownloadIcon,
+  GitCompareIcon,
+  Trash2Icon,
+  ZapIcon,
+} from "../Icons";
 
 const PRESETS = [
   "computer cpu memory ram motherboard",
@@ -53,7 +60,14 @@ function ResultPanel({
               className={result.data.cached ? "tag hit" : "tag cold"}
               title={result.data.cached ? "Lấy từ cache" : "Tính toán mới"}
             >
-              {result.data.cached ? "✓ CACHE HIT" : "↓ COLD"}
+              {result.data.cached ? (
+                <>
+                  <ZapIcon size={12} />
+                  <span>CACHE HIT</span>
+                </>
+              ) : (
+                <span>COLD</span>
+              )}
             </span>
           </div>
         </div>
@@ -92,7 +106,8 @@ function ResultPanel({
         </p>
         {onExport && (
           <button className="btn-ghost" onClick={onExport} title="Tải kết quả JSON">
-            📤 Export JSON
+            <DownloadIcon size={14} />
+            <span>Export JSON</span>
           </button>
         )}
       </div>
@@ -194,14 +209,16 @@ export default function PredictLab() {
             onClick={() => { setCompareMode((v) => !v); setCompareResult(null); }}
             title="So sánh 2 văn bản"
           >
-            🔍 So sánh
+            <GitCompareIcon size={14} />
+            <span>So sánh</span>
           </button>
           <button
             className={`btn-toggle${showHistory ? " active" : ""}`}
             onClick={() => setShowHistory((v) => !v)}
             title="Lịch sử dự đoán"
           >
-            📜 Lịch sử {history.length > 0 && <span className="history-badge">{history.length}</span>}
+            <ClockIcon size={14} />
+            <span>Lịch sử</span> {history.length > 0 && <span className="history-badge">{history.length}</span>}
           </button>
         </div>
       </div>
@@ -212,7 +229,10 @@ export default function PredictLab() {
           <div className="history-header">
             <span style={{ fontWeight: 600, fontSize: "0.9rem" }}>Lịch sử ({history.length}/10)</span>
             {history.length > 0 && (
-              <button className="btn-ghost" onClick={handleClearHistory}>🗑 Xóa tất cả</button>
+              <button className="btn-ghost" onClick={handleClearHistory}>
+                <Trash2Icon size={13} />
+                <span>Xóa tất cả</span>
+              </button>
             )}
           </div>
           {history.length === 0 ? (
@@ -297,7 +317,12 @@ export default function PredictLab() {
         disabled={busy || text.trim().length === 0}
         onClick={() => void run()}
       >
-        {busy ? "Đang dự đoán…" : compareMode ? "🔍 So sánh cả hai" : "Dự đoán"}
+        {busy ? "Đang dự đoán…" : compareMode ? (
+          <>
+            <GitCompareIcon size={16} />
+            <span>So sánh cả hai</span>
+          </>
+        ) : "Dự đoán"}
       </button>
 
       {error && (

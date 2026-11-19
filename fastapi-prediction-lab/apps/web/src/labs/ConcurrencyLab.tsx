@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { api, ApiError } from "../api";
 import { classifyConcurrency, formatSeconds, speedup, type ConcurrencyVerdict } from "../stats";
+import { AlertTriangleIcon, CheckCircleIcon, GitCompareIcon } from "../Icons";
 
 interface Span {
   startS: number;
@@ -23,10 +24,10 @@ const VERDICT_TEXT: Record<ConcurrencyVerdict, string> = {
   mixed:      "MỘT PHẦN SONG SONG",
 };
 
-const VERDICT_ICON: Record<ConcurrencyVerdict, string> = {
-  sequential: "⚠️",
-  parallel:   "✅",
-  mixed:      "🔀",
+const VERDICT_ICON: Record<ConcurrencyVerdict, ReactNode> = {
+  sequential: <AlertTriangleIcon size={16} style={{ display: "inline-block", verticalAlign: "-2px" }} />,
+  parallel:   <CheckCircleIcon size={16} style={{ display: "inline-block", verticalAlign: "-2px" }} />,
+  mixed:      <GitCompareIcon size={16} style={{ display: "inline-block", verticalAlign: "-2px" }} />,
 };
 
 async function fire(kind: "async" | "sync", n: number, sleep: number): Promise<Run> {

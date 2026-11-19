@@ -1,5 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { api, type CacheStats, type HealthData } from "./api";
+import {
+  AlertTriangleIcon,
+  BarChart3Icon,
+  BookOpenIcon,
+  BrainIcon,
+  CodeIcon,
+  CpuIcon,
+  DatabaseIcon,
+  ExternalLinkIcon,
+  FileTextIcon,
+  GithubIcon,
+  GlobeIcon,
+  LayersIcon,
+  ServerIcon,
+  TargetIcon,
+  Trash2Icon,
+  ZapIcon,
+} from "./Icons";
 import CacheLab from "./labs/CacheLab";
 import ConcurrencyLab from "./labs/ConcurrencyLab";
 import MetricsLab from "./labs/MetricsLab";
@@ -8,11 +26,11 @@ import { toast, ToastContainer } from "./Toast";
 
 type Tab = "predict" | "cache" | "concurrency" | "metrics";
 
-const TABS: { id: Tab; label: string; icon: string; shortcut: string; desc: string }[] = [
-  { id: "predict", label: "Dự đoán", icon: "🎯", shortcut: "1", desc: "Suy luận & so sánh nhãn" },
-  { id: "cache", label: "Cache Lab", icon: "💾", shortcut: "2", desc: "Cold vs Warm inference" },
-  { id: "concurrency", label: "Concurrency Lab", icon: "⚡", shortcut: "3", desc: "Async def vs Def ThreadPool" },
-  { id: "metrics", label: "Metrics", icon: "📊", shortcut: "4", desc: "P50, P95, P99 realtime" },
+const TABS: { id: Tab; label: string; icon: ReactNode; shortcut: string; desc: string }[] = [
+  { id: "predict", label: "Dự đoán", icon: <TargetIcon size={18} />, shortcut: "1", desc: "Suy luận & so sánh nhãn" },
+  { id: "cache", label: "Cache Lab", icon: <DatabaseIcon size={18} />, shortcut: "2", desc: "Cold vs Warm inference" },
+  { id: "concurrency", label: "Concurrency Lab", icon: <CpuIcon size={18} />, shortcut: "3", desc: "Async def vs Def ThreadPool" },
+  { id: "metrics", label: "Metrics", icon: <BarChart3Icon size={18} />, shortcut: "4", desc: "P50, P95, P99 realtime" },
 ];
 
 type Health = "checking" | "online" | "offline";
@@ -105,7 +123,9 @@ export default function App() {
         <header className="header">
           <div className="header-left">
             <div className="header-title-row">
-              <span className="header-icon" aria-hidden="true">⚡</span>
+              <span className="header-icon-box" aria-hidden="true">
+                <ZapIcon size={22} className="header-icon-svg" />
+              </span>
               <h1>FastAPI Prediction Lab</h1>
               <span className="version-pill">v2.1</span>
             </div>
@@ -113,10 +133,18 @@ export default function App() {
               Seminar Chapter 12: Thiết kế & Tối ưu API phục vụ Machine Learning hiệu năng cao với FastAPI.
             </p>
             <div className="header-tags">
-              <span className="tech-tag">🚀 FastAPI 0.110+</span>
-              <span className="tech-tag">🐍 Python 3.12 (AnyIO)</span>
-              <span className="tech-tag">🧠 scikit-learn 1.9.1</span>
-              <span className="tech-tag">⚛️ React 18 + Vite</span>
+              <span className="tech-tag">
+                <ServerIcon size={13} /> FastAPI 0.110+
+              </span>
+              <span className="tech-tag">
+                <CodeIcon size={13} /> Python 3.12 (AnyIO)
+              </span>
+              <span className="tech-tag">
+                <BrainIcon size={13} /> scikit-learn 1.9.1
+              </span>
+              <span className="tech-tag">
+                <LayersIcon size={13} /> React 18 + Vite
+              </span>
             </div>
           </div>
 
@@ -128,7 +156,9 @@ export default function App() {
               className="header-link-btn"
               title="Mở tài liệu Swagger UI"
             >
-              📑 Swagger API ↗
+              <FileTextIcon size={15} />
+              <span>Swagger API</span>
+              <ExternalLinkIcon size={13} />
             </a>
             <button
               className={`badge badge-${health}`}
@@ -144,7 +174,9 @@ export default function App() {
         <div className="kpi-grid">
           <div className="kpi-card">
             <div className="kpi-header">
-              <span className="kpi-icon">🌐</span>
+              <span className="kpi-icon-box">
+                <GlobeIcon size={16} />
+              </span>
               <span className="kpi-title">API GATEWAY</span>
             </div>
             <div className="kpi-value">
@@ -157,7 +189,9 @@ export default function App() {
 
           <div className="kpi-card">
             <div className="kpi-header">
-              <span className="kpi-icon">🎯</span>
+              <span className="kpi-icon-box">
+                <TargetIcon size={16} />
+              </span>
               <span className="kpi-title">MÔ HÌNH ML</span>
             </div>
             <div className="kpi-value">{accuracy}</div>
@@ -166,7 +200,9 @@ export default function App() {
 
           <div className="kpi-card">
             <div className="kpi-header">
-              <span className="kpi-icon">💾</span>
+              <span className="kpi-icon-box">
+                <DatabaseIcon size={16} />
+              </span>
               <span className="kpi-title">BỘ NHỚ ĐỆM (LRU)</span>
             </div>
             <div className="kpi-value">
@@ -177,7 +213,9 @@ export default function App() {
 
           <div className="kpi-card">
             <div className="kpi-header">
-              <span className="kpi-icon">⚡</span>
+              <span className="kpi-icon-box">
+                <ZapIcon size={16} />
+              </span>
               <span className="kpi-title">ĐỘ TRỄ INFERENCE</span>
             </div>
             <div className="kpi-value">~3 - 8 ms</div>
@@ -214,7 +252,10 @@ export default function App() {
             {/* Quick Cache Telemetry Widget */}
             <div className="sidebar-widget">
               <div className="widget-header">
-                <span className="widget-title">💾 Bộ nhớ đệm (LRU)</span>
+                <span className="widget-title">
+                  <DatabaseIcon size={14} style={{ display: "inline-block", verticalAlign: "middle", marginRight: 6 }} />
+                  Bộ nhớ đệm (LRU)
+                </span>
                 <span className="widget-badge">{hitRatePct}% Hit</span>
               </div>
               <div className="widget-bar-track">
@@ -232,14 +273,18 @@ export default function App() {
                 onClick={() => void handleClearCache()}
                 disabled={clearingCache}
               >
-                {clearingCache ? "Đang xóa…" : "🗑️ Dọn sạch Cache"}
+                <Trash2Icon size={13} style={{ display: "inline-block", verticalAlign: "middle", marginRight: 5 }} />
+                {clearingCache ? "Đang xóa…" : "Dọn sạch Cache"}
               </button>
             </div>
 
             {/* Model Spec Card */}
             <div className="sidebar-widget info-widget">
               <div className="widget-header">
-                <span className="widget-title">🧠 Thông số Model</span>
+                <span className="widget-title">
+                  <BrainIcon size={14} style={{ display: "inline-block", verticalAlign: "middle", marginRight: 6 }} />
+                  Thông số Model
+                </span>
               </div>
               <div className="info-widget-content">
                 <div className="info-row">
@@ -248,7 +293,7 @@ export default function App() {
                 </div>
                 <div className="info-row">
                   <span className="info-key">Vectorize:</span>
-                  <span className="info-val">TF-IDF (ngram 1-2)</span>
+                  <span className="info-val">TF-IDF (1-2 gram)</span>
                 </div>
                 <div className="info-row">
                   <span className="info-key">Cache Key:</span>
@@ -271,8 +316,11 @@ export default function App() {
                   rel="noreferrer"
                   className="sidebar-ext-link"
                 >
-                  <span>📑 Swagger UI (/docs)</span>
-                  <span className="ext-icon">↗</span>
+                  <span className="ext-link-left">
+                    <FileTextIcon size={14} />
+                    <span>Swagger UI (/docs)</span>
+                  </span>
+                  <ExternalLinkIcon size={12} className="ext-icon" />
                 </a>
                 <a
                   href="http://127.0.0.1:8000/redoc"
@@ -280,8 +328,11 @@ export default function App() {
                   rel="noreferrer"
                   className="sidebar-ext-link"
                 >
-                  <span>📘 ReDoc Documentation</span>
-                  <span className="ext-icon">↗</span>
+                  <span className="ext-link-left">
+                    <BookOpenIcon size={14} />
+                    <span>ReDoc Documentation</span>
+                  </span>
+                  <ExternalLinkIcon size={12} className="ext-icon" />
                 </a>
                 <a
                   href="https://github.com/nduc2407/fastapi-prediction-lab"
@@ -289,8 +340,11 @@ export default function App() {
                   rel="noreferrer"
                   className="sidebar-ext-link"
                 >
-                  <span>🐙 GitHub Repository</span>
-                  <span className="ext-icon">↗</span>
+                  <span className="ext-link-left">
+                    <GithubIcon size={14} />
+                    <span>GitHub Repository</span>
+                  </span>
+                  <ExternalLinkIcon size={12} className="ext-icon" />
                 </a>
               </div>
             </div>
@@ -304,7 +358,9 @@ export default function App() {
           <main className="main-content">
             {health === "offline" && (
               <div className="alert-banner" role="alert">
-                <span className="alert-icon">⚠️</span>
+                <span className="alert-icon">
+                  <AlertTriangleIcon size={22} />
+                </span>
                 <div>
                   <strong>Không kết nối được Backend FastAPI (Port 8000)!</strong>
                   <p style={{ margin: "4px 0 0", fontSize: "0.85rem" }}>
