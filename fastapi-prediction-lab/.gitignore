@@ -1,31 +1,41 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.pytest_cache/
-
 # Virtual environment
 .venv/
 venv/
 env/
+ENV/
+env.bak/
+venv.bak/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
 
 # Environment variables
 .env
 .env.*
+!.env.example
 
-# IDE
+# IDE & Editor
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
-
-# Model files (tùy dung lượng)
-*.pt
-*.pth
-*.onnx
 
 # Node
 node_modules/
 dist/
+build/
+
+# ML models (tùy chọn)
+*.pt
+*.pth
+*.onnx

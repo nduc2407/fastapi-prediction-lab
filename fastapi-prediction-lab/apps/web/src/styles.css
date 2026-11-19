@@ -30,7 +30,9 @@
 }
 
 /* ── Reset / Base ─────────────────────────────────────────────────── */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -50,11 +52,33 @@ code {
   border: 1px solid var(--border-subtle);
 }
 
-h1 { margin: 0 0 4px; font-size: 1.65rem; font-weight: 800; letter-spacing: -0.02em; }
-h2 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 700; }
-h3 { margin: 20px 0 6px; font-size: 0.95rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+h1 {
+  margin: 0 0 4px;
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
 
-.muted { color: var(--text-muted); margin: 4px 0 12px; font-size: 0.9rem; }
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+h3 {
+  margin: 20px 0 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.muted {
+  color: var(--text-muted);
+  margin: 4px 0 12px;
+  font-size: 0.9rem;
+}
 
 /* ── Layout Shell ─────────────────────────────────────────────────── */
 .shell {
@@ -209,8 +233,15 @@ h3 { margin: 20px 0 6px; font-size: 0.95rem; font-weight: 600; color: var(--text
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
 button:focus-visible,
@@ -319,7 +350,9 @@ textarea:focus {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .chips {
@@ -360,8 +393,15 @@ textarea:focus {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .result-category {
@@ -505,7 +545,8 @@ thead {
   background: var(--surface);
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 12px 14px;
   border-bottom: 1px solid var(--border-subtle);
@@ -574,9 +615,17 @@ tbody tr:hover {
   gap: 6px;
 }
 
-.verdict.sequential { color: var(--amber); }
-.verdict.parallel   { color: var(--mint); }
-.verdict.mixed      { color: var(--text); }
+.verdict.sequential {
+  color: var(--amber);
+}
+
+.verdict.parallel {
+  color: var(--mint);
+}
+
+.verdict.mixed {
+  color: var(--text);
+}
 
 /* ── Summary Box ──────────────────────────────────────────────────── */
 .summary {
@@ -625,9 +674,20 @@ tbody tr:hover {
 
 /* ── Responsive ───────────────────────────────────────────────────── */
 @media (max-width: 700px) {
-  .shell { padding: 16px 12px 60px; }
-  .header { flex-direction: column; gap: 12px; }
-  .layout { flex-direction: column; gap: 0; }
+  .shell {
+    padding: 16px 12px 60px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .layout {
+    flex-direction: column;
+    gap: 0;
+  }
+
   .sidebar {
     width: 100%;
     flex-direction: row;
@@ -638,6 +698,7 @@ tbody tr:hover {
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border-subtle);
   }
+
   .sidebar-item {
     width: auto;
     flex: 1;
@@ -645,26 +706,54 @@ tbody tr:hover {
     padding: 8px 10px;
     font-size: 0.82rem;
   }
-  .sidebar-label { display: none; }
-  .sidebar-icon { font-size: 1.3rem; }
-  .bars li, .timeline li {
+
+  .sidebar-label {
+    display: none;
+  }
+
+  .sidebar-icon {
+    font-size: 1.3rem;
+  }
+
+  .bars li,
+  .timeline li {
     grid-template-columns: 90px 1fr 52px;
     gap: 6px;
   }
+
   .bar-label {
     font-size: 0.78rem;
     max-width: 90px;
   }
-  .bar-track.small { width: 70px; }
-  .controls { gap: 14px; }
-  .result-header { flex-direction: column; }
-  .card { padding: 20px 16px; }
+
+  .bar-track.small {
+    width: 70px;
+  }
+
+  .controls {
+    gap: 14px;
+  }
+
+  .result-header {
+    flex-direction: column;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .bar-fill,
   .result,
-  .tab-content { transition: none; animation: none; }
+  .tab-content {
+    transition: none;
+    animation: none;
+  }
+
   .badge-online::before,
-  .refresh-dot { animation: none; }
+  .refresh-dot {
+    animation: none;
+  }
 }

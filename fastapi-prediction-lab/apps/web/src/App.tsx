@@ -8,10 +8,10 @@ import PredictLab from "./labs/PredictLab";
 type Tab = "predict" | "cache" | "concurrency" | "metrics";
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: "predict",     label: "Dự đoán",        icon: "🎯" },
-  { id: "cache",       label: "Cache Lab",       icon: "💾" },
+  { id: "predict", label: "Dự đoán", icon: "🎯" },
+  { id: "cache", label: "Cache Lab", icon: "💾" },
   { id: "concurrency", label: "Concurrency Lab", icon: "⚡" },
-  { id: "metrics",     label: "Metrics",         icon: "📊" },
+  { id: "metrics", label: "Metrics", icon: "📊" },
 ];
 
 type Health = "checking" | "online" | "offline";
@@ -36,8 +36,8 @@ export default function App() {
 
   const badgeLabel =
     health === "checking" ? "Đang kiểm tra…"
-    : health === "online"  ? "API: ONLINE"
-    : "API: OFFLINE";
+      : health === "online" ? "API: ONLINE"
+        : "API: OFFLINE";
 
   return (
     <div className="shell">
@@ -83,10 +83,10 @@ export default function App() {
             </p>
           )}
           <div className="tab-content">
-            {tab === "predict"     && <PredictLab />}
-            {tab === "cache"       && <CacheLab />}
+            {tab === "predict" && <PredictLab />}
+            {tab === "cache" && <CacheLab />}
             {tab === "concurrency" && <ConcurrencyLab />}
-            {tab === "metrics"     && <MetricsLab />}
+            {tab === "metrics" && <MetricsLab />}
           </div>
         </main>
       </div>
